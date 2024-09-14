@@ -37,5 +37,5 @@ If possible, keep a custom component style to tailwind classes, if not move to a
 
 ### Resources
 
-- Read the [roadmap]() to understand and discuss the journey ahead.
-- See the [figma design doc]()
+- Read the [milestone](https://github.com/akkhayar/poneyape/milestone/1#:~:text=This%20is%20the,requirements%20of%20poneyape.) to understand and discuss the journey ahead.
+- Contact me @Rickaym to see the figma design doc
