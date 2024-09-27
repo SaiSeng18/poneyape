@@ -1,4 +1,3 @@
-import { transform } from "next/dist/build/swc";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -36,8 +35,10 @@ const config: Config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        backgroundBlue: "hsl(var(--background-blue))",
+        background: "var(--background)",
+        destructive: "hsl(var(--destructive))",
+        "destructive-foreground": "hsl(var(--destructive-foreground))",
+        backgroundBlue: "var(--background-blue)",
         foreground: "hsl(var(--foreground))",
         primary: "var(--primary)",
         midGrey: "var(--mid-grey-color)",
