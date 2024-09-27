@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: rgb(248, 245, 247);
+    --background: #fbf9f7;
     --background-blue: rgb(226, 252, 255);
     --foreground: rgb(27, 27, 27);
 
@@ -127,7 +127,7 @@
 body {
   scroll-behavior: smooth;
   color: rgb(var(--foreground-rgb));
-  background: #fbf9f7;
+  background: var(--background);
 }
 
 .tab-wrapper {
@@ -156,71 +156,5 @@ svg:hover {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-}
-
-@layer components {
-  button.c-primary {
-    border-radius: 5px;
-    background: linear-gradient(90deg, #5d25c7 0%, #2252df 100%);
-    color: white;
-    padding: 10px 24px;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 150%;
-    /* 24px */
-    transition: all ease 200ms;
-  }
-
-  button.c-primary:hover {
-    box-shadow:
-      0px 1px 2px 0px rgba(0, 0, 0, 0.3),
-      0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  }
-
-  button.c-primary:active {
-    filter: opacity(0.88);
-    box-shadow: none;
-  }
-
-  button.c-primary.c-solid {
-    background: var(--primary);
-  }
-
-  button.c-outline {
-    border-radius: 5px;
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    padding: 10px 24px;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 150%;
-    /* 24px */
-    outline: none;
-    transition: all ease 200ms;
-  }
-
-  button.c-outline:hover {
-    border: 1px solid var(--primary);
-  }
-
-  button.c-outline.c-white {
-    border: 1px solid #fff;
-    color: #fff;
-  }
-
-  button.c-outline.c-black {
-    border: 1px solid #000000;
-    color: #000000;
-  }
-
-  button.c-outline.c-white:hover {
-    border: 1px solid #fff;
-  }
-
-  button.c-outline.c-black:hover {
-    border: 1px solid #000;
   }
 }

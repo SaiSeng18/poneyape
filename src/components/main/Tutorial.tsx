@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { createStringExtractor } from "@/lib/util";
+import { Button } from "../ui/button";
 
 const Tutorial = () => {
   const lang = "en";
@@ -19,9 +20,9 @@ const Tutorial = () => {
         <div className="flex flex-col gap-6">
           <h3 className="font-semibold">{t("tutorialTitle")}</h3>
           <p>{t("tutorialDescription")}</p>
-          <button className="c-primary c-solid mt-4 md:w-fit">
+          <Button className="mt-4 md:w-fit" variant="solid">
             {t("tutorialButton")}
-          </button>
+          </Button>
         </div>
       </div>
     </section>

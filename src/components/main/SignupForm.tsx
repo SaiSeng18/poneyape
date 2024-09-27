@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import React, { useState } from "react";
+import { Button } from "../ui/button";
 
 const SignupForm = ({ onHide }: { onHide: () => void }) => {
   const [email, setEmail] = useState("");
@@ -53,9 +54,7 @@ const SignupForm = ({ onHide }: { onHide: () => void }) => {
         type="password"
         placeholder="Confirm Password"
       />
-      <button className="c-primary c-solid" onClick={handleEmailSignUp}>
-        Register
-      </button>
+      <Button variant="solid" onClick={handleEmailSignUp}>Register</Button>
     </div>
   );
 };

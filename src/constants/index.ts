@@ -211,6 +211,10 @@ export const placeholderUserData: UserData = {
   socials: ["https://linkedin.com", "https://x.com", "https://thazin-win.com"],
 };
 
+
+export const tags = ["Blog", "Corporate"];
+
+
 export const faq: FAQ[] = [
   {
     id: 1,

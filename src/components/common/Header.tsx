@@ -6,6 +6,16 @@ import { usePathname } from "next/navigation";
 import { routes } from "@/constants";
 import { useFirebase } from "@/hooks/useFirebase";
 import Image from "next/image";
+import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+} from "../ui/select";
+import { Cross1Icon } from "@radix-ui/react-icons";
 
 const getNavItemIcon = (route: keyof typeof routes) => {
   switch (route) {
@@ -96,58 +106,17 @@ const Header = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const pathname = usePathname().trim();
   const [showBanner, setShowBanner] = useState(true);
-  const { currentUser, logout} = useFirebase();
+  const { currentUser, logout } = useFirebase();
 
   return (
     <>
       <AuthModal show={showAuthModal} setShow={setShowAuthModal} />
 
       {showBanner && (
-        <section className="bg-linear-gradient-yellow-to-orange">
+        <section className="bg-white">
           <div className="container mx-auto flex items-center justify-between py-2">
             <div className="flex items-center gap-10">
-              <div className="w-[43px]">
-                <svg
-                  className="animate-[wiggle_0.7s_ease-in-out_infinite]"
-                  width="36"
-                  height="37"
-                  viewBox="0 0 36 37"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g clipPath="url(#clip0_760_2186)">
-                    <path
-                      d="M10.5 2C10.5 1.17157 9.82843 0.5 9 0.5C8.17157 0.5 7.5 1.17157 7.5 2V6.5C7.5 7.32843 8.17157 8 9 8C9.82843 8 10.5 7.32843 10.5 6.5V2Z"
-                      fill="#1B1B1B"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M1.5 12.5C1.5 11.6716 2.17157 11 3 11H28.5C30.4891 11 32.3968 11.7902 33.8033 13.1967C35.2098 14.6032 36 16.5109 36 18.5C36 20.4891 35.2098 22.3968 33.8033 23.8033C32.3968 25.2098 30.4891 26 28.5 26C28.5 27.9891 27.7098 29.8968 26.3033 31.3033C24.8968 32.7098 22.9891 33.5 21 33.5H9C7.01088 33.5 5.10322 32.7098 3.6967 31.3033C2.29018 29.8968 1.5 27.9891 1.5 26V12.5ZM28.5 23V14C29.6935 14 30.8381 14.4741 31.682 15.318C32.5259 16.1619 33 17.3065 33 18.5C33 19.6935 32.5259 20.8381 31.682 21.682C30.8381 22.5259 29.6935 23 28.5 23ZM25.5 14V26C25.5 27.1935 25.0259 28.3381 24.182 29.182C23.3381 30.0259 22.1935 30.5 21 30.5H9C7.80653 30.5 6.66193 30.0259 5.81802 29.182C4.97411 28.3381 4.5 27.1935 4.5 26V14H25.5Z"
-                      fill="#1B1B1B"
-                    />
-                    <path
-                      d="M15 0.5C15.8284 0.5 16.5 1.17157 16.5 2V6.5C16.5 7.32843 15.8284 8 15 8C14.1716 8 13.5 7.32843 13.5 6.5V2C13.5 1.17157 14.1716 0.5 15 0.5Z"
-                      fill="#1B1B1B"
-                    />
-                    <path
-                      d="M22.5 2C22.5 1.17157 21.8284 0.5 21 0.5C20.1716 0.5 19.5 1.17157 19.5 2V6.5C19.5 7.32843 20.1716 8 21 8C21.8284 8 22.5 7.32843 22.5 6.5V2Z"
-                      fill="#1B1B1B"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_760_2186">
-                      <rect
-                        width="36"
-                        height="36"
-                        fill="white"
-                        transform="translate(0 0.5)"
-                      />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </div>
-              <div className="">
+              <div className="mx-16">
                 <h5 className="font-bold">Volunteer Opportunities Available</h5>
                 <p className="lg:text-[14px]">
                   We’ve opened volunteering opportunities for the following -
@@ -156,7 +125,7 @@ const Header = () => {
               </div>
             </div>
 
-            <button onClick={() => setShowBanner(false)}>
+            <button className="me-16" onClick={() => setShowBanner(false)}>
               <svg
                 width="32"
                 height="33"
@@ -181,26 +150,7 @@ const Header = () => {
             className="lg:hidden"
             onClick={() => setShowMenuPage(true)}
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z"
-                fill="#2D3648"
-              />
-              <path
-                d="M2 12C2 11.4477 2.44772 11 3 11H21C21.5523 11 22 11.4477 22 12C22 12.5523 21.5523 13 21 13H3C2.44772 13 2 12.5523 2 12Z"
-                fill="#2D3648"
-              />
-              <path
-                d="M3 17C2.44772 17 2 17.4477 2 18C2 18.5523 2.44772 19 3 19H21C21.5523 19 22 18.5523 22 18C22 17.4477 21.5523 17 21 17H3Z"
-                fill="#2D3648"
-              />
-            </svg>
+            <Cross1Icon />
           </button>
           <Link href="/" className="font-pyidaungsu text-[20px]">
             ပုံရိပ်
@@ -279,19 +229,31 @@ const Header = () => {
           Search
         </button>
         <div className="flex gap-2">
-          <select className="rounded-[5px] border border-midGrey bg-transparent px-4 py-[10px]">
-            <option className="hover:text-black">ENG</option>
-            <option>MY</option>
-          </select>
+          <Select>
+            <SelectTrigger className="text-[16px] h-full border-gray-500">
+              <div className="flex items-center justify-center gap-1">Eng</div>
+            </SelectTrigger>
+            <SelectContent className="bg-background">
+              <SelectGroup>
+                <SelectItem key="eng" value="eng">
+                  ENG
+                </SelectItem>
+                <SelectItem key="my" value="my">
+                  MY
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
 
           {currentUser ? (
             <>
-              <button
-                className="c-outline hidden pb-6 lg:block"
+              <Button
+                className="hidden lg:block py-0"
                 onClick={() => setShowAuthModal(true)}
+                variant="outline"
               >
                 Submit Work
-              </button>
+              </Button>
               <Image
                 className="rounded-full"
                 src={currentUser?.photoURL || ""}

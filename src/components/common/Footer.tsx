@@ -7,14 +7,7 @@ const Footer = () => {
       <div className="w-full max-w-screen-xl p-6 md:px-16">
         <div className="md:flex md:justify-between">
           <div className="mb-6 flex flex-col gap-6 md:mb-0">
-            <Link href="https://flowbite.com/" className="flex items-center">
-              {/* <Image
-                src="https://flowbite.com/docs/images/logo.svg"
-                className="me-3 h-8"
-                alt="FlowBite Logo"
-                width={25}
-                height={25}
-              /> */}
+            <Link href="https://poneyape.com/" className="flex items-center">
               <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
                 PoneYape
               </span>
@@ -24,16 +17,14 @@ const Footer = () => {
                 Our Vision
               </h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit.
+                Elevating design excellence in myanmar.
               </p>
             </div>
             <div>
               <h2 className="font-poppins text-sm font-semibold uppercase text-gray-900 dark:text-white">
                 Contact
               </h2>
-              <p>9590 123 4567</p>
-              <p>info@poneyape.com</p>
+                <p>info@poneyape.com</p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
@@ -44,18 +35,10 @@ const Footer = () => {
               <ul className="font-medium text-gray-500 dark:text-gray-400">
                 <li className="mb-4">
                   <Link
-                    href="https://flowbite.com/"
+                    href="https://poneyape.com/about"
                     className="hover:underline"
                   >
                     About
-                  </Link>
-                </li>
-                <li className="mb-4">
-                  <Link
-                    href="https://tailwindcss.com/"
-                    className="hover:underline"
-                  >
-                    Features
                   </Link>
                 </li>
                 <li className="mb-4">
@@ -132,7 +115,7 @@ const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © {new Date().getFullYear()}{" "}
-            <Link href="https://flowbite.com/" className="hover:underline">
+            <Link href="https://akkhayar.com/" className="hover:underline">
               Akkhayar™
             </Link>
             . All Rights Reserved.

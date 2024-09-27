@@ -4,8 +4,8 @@ import "./globals.css";
 import Header from "@/components/common/Header";
 import LenisWrapper from "@/lib/lenis-wrapper";
 import Footer from "@/components/common/Footer";
-import Head from "next/head";
 import { FirebaseProvider } from "@/context/firebaseContext";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -20,8 +20,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "poneyape",
-  description: "Poneyape",
+  title: "PoneYape - Elevating Desgin Excellence in Myanmar",
+  description: "Join a vibrant community of designers and unleash your creativity with Poneyape. Whether you're seeking inspiration or aiming to refine your skills, Poneyape is your gateway to mastering Burmese typography and beyond.",
 };
 
 export default function RootLayout({
@@ -30,19 +30,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <Head>
-        <link
-          href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css"
-          rel="stylesheet"
-        />
-      </Head>
+    <html lang="en">      
       <body
         className={`${inter.className} ${poppins.variable} ${roboto.variable}`}
       >
         <FirebaseProvider>
           <Header />
           <LenisWrapper>{children}</LenisWrapper>
+          <Toaster />
           <Footer />
         </FirebaseProvider>
         <script

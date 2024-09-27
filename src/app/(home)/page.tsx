@@ -4,12 +4,14 @@ import LatestNews from "@/components/main/LatestNews";
 import HomeSection from "@/components/main/HomeSection";
 import HotTrend from "@/components/main/HotTrend";
 import FAQ from "@/components/main/FAQ";
+import MonthlyPopularSection from "@/components/main/MothlyPopularSites";
 
 export default function Home() {
   const lang = "en";
   return (
-    <div className={`lang-${lang} bg-[var(--background-blue)]`}>
+    <div className={`lang-${lang}`}>
       <HomeSection />
+      <MonthlyPopularSection />
       <HotTrend />
       <Testimonial />
       <Tutorial />

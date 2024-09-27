@@ -1,6 +1,7 @@
 import { createStringExtractor } from "@/lib/util";
 import Link from "next/link";
 import React from "react";
+import { Button } from "../ui/button";
 
 const LatestNews = () => {
   const lang = "en";
@@ -8,7 +9,7 @@ const LatestNews = () => {
   return (
     <section className="bg-[url('/assets/images/subscribe-bg.webp')] px-6 py-20 text-white md:px-16 md:py-[120px]">
       <div className="flex flex-col gap-6">
-        <h3 className="font-semibold">{t("ctaTitle")}</h3>
+        <h1>{t("ctaTitle")}</h1>
         <p className="c-body">{t("ctaDescription")}</p>
         <div>
           <div className="mb-4">
@@ -17,9 +18,9 @@ const LatestNews = () => {
               type="text"
               placeholder="Enter your email"
             />
-            <button className="c-primary w-full md:w-fit">
+            <Button className="w-full md:w-fit" variant="flashy">
               {t("ctaButton")}
-            </button>
+            </Button>
           </div>
           <p>
             By subscribing, you agree to our{" "}

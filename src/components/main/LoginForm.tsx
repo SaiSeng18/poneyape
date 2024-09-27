@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import React, { useState } from "react";
+import { Button } from "../ui/button";
 
 const LoginForm = ({ onHide }: { onHide: () => void }) => {
   const [email, setEmail] = useState("");
@@ -48,9 +49,9 @@ const LoginForm = ({ onHide }: { onHide: () => void }) => {
         value={pswd}
         onChange={(e) => setPswd(e.target.value)}
       />
-      <button className="c-primary c-solid" onClick={handleEmailSignUp}>
+      <Button variant="solid" onClick={handleEmailSignUp}>
         Login
-      </button>
+      </Button>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { auth } from "@/lib/firebase";
 import LoginForm from "@/components/main/LoginForm";
 import SignupForm from "@/components/main/SignupForm";
 import { useState } from "react";
+import { Button } from "../ui/button";
 
 const AuthModal = ({ show, setShow }: AuthModalProps) => {
   const [view, setView] = useState<"signup" | "login">("signup");
@@ -38,7 +39,7 @@ const AuthModal = ({ show, setShow }: AuthModalProps) => {
       aria-label="Backdrop"
     >
       <div
-        className="relative max-h-full w-full max-w-[600px] rounded-lg shadow dark:bg-gray-700 h-[700px]"
+        className="relative h-[700px] max-h-full w-full max-w-[600px] rounded-lg shadow dark:bg-gray-700"
         aria-label="Modal"
         style={{
           background:
@@ -81,35 +82,38 @@ const AuthModal = ({ show, setShow }: AuthModalProps) => {
             <SignupForm onHide={closeModal} />
           )}
           <div className="relative py-4">
-            <span className="absolute left-[220px] top-1 bg-black px-1 text-white">
+            <span className="absolute left-[235px] top-1 bg-black px-1 text-white">
               OR
             </span>
             <hr className="border border-dashed border-[#1B1B1B]" />
           </div>
-          <button
-            data-modal-hide="default-modal"
-            type="button"
-            className="c-outline c-black"
+          <Button
+            className="bg-transparent"
             onClick={handleGoogleSignIn}
+            variant="outline"
           >
             Continue with Google
-          </button>
-          <button
-            data-modal-hide="default-modal"
-            type="button"
-            className="c-outline c-black"
+          </Button>
+          <Button
+            className="bg-transparent"
+            onClick={handleGoogleSignIn}
+            variant="outline"
           >
             Continue with Facebook
-          </button>
+          </Button>
           {view === "signup" ? (
             <p className="text-center">
               Already have an account?{" "}
-              <button className="underline" onClick={() => setView("login")}>Log in</button>
+              <button className="underline" onClick={() => setView("login")}>
+                Log in
+              </button>
             </p>
           ) : (
             <p className="text-center">
               Don&apos;t have an account?{" "}
-              <button className="underline" onClick={() => setView("signup")}>Sign Up</button>
+              <button className="underline" onClick={() => setView("signup")}>
+                Sign Up
+              </button>
             </p>
           )}
         </div>

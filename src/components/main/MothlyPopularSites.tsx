@@ -1,11 +1,19 @@
+import { createStringExtractor } from "@/lib/util";
 import React from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { websiteCard } from "@/constants";
 
-const WebsiteOfTheMonthSlider = () => {
+const MonthlyPopularSection = () => {
+  const lang = "en";
+  const t = createStringExtractor(lang);
+
   return (
-    <>
-      <div className="tab-wrapper mb-28 flex space-x-10 overflow-x-auto">
+    <section className="flex flex-col px-6 pb-10 md:px-16 md:pb-[120px] ">
+      <div className="mb-20 flex flex-col gap-4">
+        <h3 className="text-left font-semibold">{t("popularWebsitesTitle")}</h3>
+        <p>{t("popularWebsitesDescription")}</p>
+      </div>
+      <div className="tab-wrapper flex space-x-10 overflow-x-auto">
         {websiteCard.map((card) => (
           <div key={card.id} className="group relative rounded-xl">
             <Image
@@ -81,8 +89,8 @@ const WebsiteOfTheMonthSlider = () => {
           />
         </svg>
       </div>
-    </>
+    </section>
   );
 };
 
-export default WebsiteOfTheMonthSlider;
+export default MonthlyPopularSection;

@@ -1,11 +1,12 @@
 "use client";
 
 import SiteView from "@/components/main/SiteView";
-import { placeholderUserData } from "@/constants";
-import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
+import { placeholderUserData, tags } from "@/constants";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import Cross from "@/components/Cross";
 import { PlusIcon } from "@radix-ui/react-icons";
 import {
   Select,
@@ -19,6 +20,7 @@ import Tag from "@/components/common/Tag";
 import { Input } from "@/components/ui/input";
 import { db } from "@/lib/firebase";
 import { useFirebase } from "@/hooks/useFirebase";
+import { toast } from "@/hooks/use-toast";
 
 export default function CreatePage() {
   const [newColorPalette, setNewColorPalette] = useState("");
@@ -33,7 +35,7 @@ export default function CreatePage() {
     authors: [],
     // set when submitted
     publishDate: 0,
-    ownerId: "", 
+    ownerId: "",
   });
 
   const submit = () => {
@@ -66,9 +68,6 @@ export default function CreatePage() {
             Your Website
           </p>
         </div>
-        <div className="flex h-[100px] w-full items-center justify-center rounded-xl border border-dashed border-gray-600 bg-gray-100">
-          Upload a cover Image
-        </div>
         {/* <Image
           src="/eg.png"
           alt="Cover Image"
@@ -83,10 +82,16 @@ export default function CreatePage() {
         aria-label="Website Details"
       >
         <div className="border-b border-dashed border-black pb-10 md:flex md:justify-between md:pb-16">
+          <h5 className="mb-4 font-bold">Cover Image</h5>
+          <div className="flex h-[100px] w-[600px] items-center justify-center rounded-xl border border-dashed border-gray-500 bg-gray-100">
+            Upload a cover Image
+          </div>
+        </div>
+        <div className="border-b border-dashed border-black pb-10 md:flex md:justify-between md:pb-16">
           <h5 className="mb-4 font-bold">Description</h5>
           <Textarea
             rows={4}
-            className="border-black md:max-w-[600px]"
+            className="border-gray-500 md:max-w-[600px]"
             placeholder="What does the page do? What purpose does it serve?"
             value={currentData.description}
             onChange={(e) =>
@@ -98,7 +103,7 @@ export default function CreatePage() {
           <h5 className="mb-4 font-bold">Vision</h5>
           <Textarea
             rows={4}
-            className="border-black md:max-w-[600px]"
+            className="border-gray-500 md:max-w-[600px]"
             placeholder="How do you want to impact the viewer, the user?"
             value={currentData.vision}
             onChange={(e) =>
@@ -113,18 +118,27 @@ export default function CreatePage() {
           <h5 className="mb-4 font-bold">Color Palette</h5>
           <div className="flex flex-col gap-4">
             <Input
+              className="ms-auto max-w-[200px] border-gray-500"
               placeholder="Add a hex color!"
               value={newColorPalette}
               onChange={(e) => setNewColorPalette(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  setCurrentData({
-                    ...currentData,
-                    colorPalette: [
-                      ...currentData.colorPalette,
-                      newColorPalette,
-                    ],
-                  });
+                  if (currentData.colorPalette.includes(newColorPalette)) {
+                    toast({
+                      title: "Uh Oh!",
+                      description: "You can't add the same color twice.",
+                      variant: "destructive"
+                    });
+                  } else {
+                    setCurrentData({
+                      ...currentData,
+                      colorPalette: [
+                        ...currentData.colorPalette,
+                        newColorPalette,
+                      ],
+                    });
+                  }
                   setNewColorPalette("");
                 }
               }}
@@ -133,9 +147,23 @@ export default function CreatePage() {
               {currentData.colorPalette.map((color) => (
                 <div
                   key={color}
-                  className="flex h-[170px] w-16 items-end justify-center rounded-[40px] pb-[11px]"
+                  className="flex h-[170px] w-16 flex-col items-center justify-between rounded-[40px] py-4 pb-[11px]"
                   style={{ background: color }}
                 >
+                  <button
+                    type="button"
+                    className="mix-blend-difference invert"
+                    onClick={() =>
+                      setCurrentData({
+                        ...currentData,
+                        colorPalette: currentData.colorPalette.filter(
+                          (e) => e !== color,
+                        ),
+                      })
+                    }
+                  >
+                    <Cross />
+                  </button>
                   <span
                     className="mix-blend-difference invert"
                     style={{ writingMode: "vertical-rl" }}
@@ -172,17 +200,26 @@ export default function CreatePage() {
                 })
               }
             >
-              <SelectTrigger className="w-[280px]">
+              <SelectTrigger className="w-[280px] border-gray-500">
                 <div className="flex items-center justify-center gap-1">
                   <PlusIcon />
                   Add Tag
                 </div>
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-background">
                 <SelectGroup>
-                  <SelectLabel>Tags</SelectLabel>
-                  <SelectItem value="Blog">Blog</SelectItem>
-                  <SelectItem value="Scientific">Scientific</SelectItem>
+                  <SelectLabel>
+                    {tags.length === currentData.tags.length
+                      ? "All tags added!"
+                      : "Tag"}
+                  </SelectLabel>
+                  {tags
+                    .filter((tag) => !currentData.tags.includes(tag))
+                    .map((tag) => (
+                      <SelectItem key={tag} value={tag}>
+                        {tag}
+                      </SelectItem>
+                    ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -191,7 +228,7 @@ export default function CreatePage() {
 
         <h1 className="mt-10 font-bold">Other Screens of the Website</h1>
         <div className="flex flex-col gap-4">
-          <div className="flex h-[100px] w-[300px] items-center justify-center rounded-xl border border-dashed border-gray-600 bg-gray-100">
+          <div className="flex h-[100px] w-[500px] items-center justify-center rounded-xl border border-dashed border-gray-600 bg-gray-100">
             Upload an Image
           </div>
         </div>
