@@ -12,10 +12,9 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
 } from "../ui/select";
-import { Cross1Icon } from "@radix-ui/react-icons";
+import { Menu, Search, X } from "lucide-react";
 
 const getNavItemIcon = (route: keyof typeof routes) => {
   switch (route) {
@@ -105,72 +104,43 @@ const Header = () => {
   const [showMenuPage, setShowMenuPage] = useState<boolean>(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const pathname = usePathname().trim();
-  const [showBanner, setShowBanner] = useState(true);
   const { currentUser, logout } = useFirebase();
 
   return (
     <>
       <AuthModal show={showAuthModal} setShow={setShowAuthModal} />
 
-      {showBanner && (
-        <section className="bg-white">
-          <div className="container mx-auto flex items-center justify-between py-2">
-            <div className="flex items-center gap-10">
-              <div className="mx-16">
-                <h5 className="font-bold">Volunteer Opportunities Available</h5>
-                <p className="lg:text-[14px]">
-                  We’ve opened volunteering opportunities for the following -
-                  full stack developer x1 , front end developer x2
-                </p>
-              </div>
-            </div>
+      <div className="max-h-[60px] w-full bg-white py-2">
+        <h5 className="text-nowrap font-bold">
+          Volunteer Opportunities Available
+        </h5>
+      </div>
 
-            <button className="me-16" onClick={() => setShowBanner(false)}>
-              <svg
-                width="32"
-                height="33"
-                viewBox="0 0 32 33"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M22.8353 22.864L22.3638 23.3354C22.1035 23.5957 21.6814 23.5957 21.421 23.3354L15.9999 17.9142L10.5787 23.3353C10.3184 23.5957 9.89626 23.5957 9.63591 23.3353L9.1645 22.8639C8.90415 22.6036 8.90415 22.1815 9.1645 21.9211L14.5857 16.5L9.1645 11.0788C8.90415 10.8185 8.90415 10.3964 9.1645 10.136L9.6359 9.66463C9.89625 9.40428 10.3184 9.40428 10.5787 9.66463L15.9999 15.0858L21.421 9.66462C21.6814 9.40427 22.1035 9.40427 22.3638 9.66462L22.8353 10.136C23.0956 10.3964 23.0956 10.8185 22.8353 11.0788L17.4141 16.5L22.8353 21.9211C23.0956 22.1815 23.0956 22.6036 22.8353 22.864Z"
-                  fill="black"
-                />
-              </svg>
-            </button>
-          </div>
-        </section>
-      )}
-
-      <nav className="flex h-[72px] items-center justify-between gap-10 border-b border-solid border-b-bg1 bg-[#ffffff66] px-6 lg:justify-normal lg:px-16">
+      <nav className="sticky top-0 z-20 flex h-[72px] items-center justify-between gap-10 border-b border-solid border-b-bg1 bg-[#ffffff90] px-6 backdrop-blur-xl lg:justify-normal lg:px-16">
         <div className="flex gap-2">
           <button
             type="button"
             className="lg:hidden"
             onClick={() => setShowMenuPage(true)}
           >
-            <Cross1Icon />
+            <Menu />
           </button>
           <Link href="/" className="font-pyidaungsu text-[20px]">
             ပုံရိပ်
           </Link>
         </div>
+        
         <div
           className="absolute left-0 top-0 h-screen w-screen overflow-y-hidden bg-white px-5 py-10 lg:static lg:h-fit lg:w-fit lg:bg-transparent"
           hidden={!showMenuPage}
         >
           <div
-            className="mb-8 border-b border-[#E5E5E0] pb-8 lg:hidden"
+            className="mb-8 flex justify-between border-b border-[#E5E5E0] pb-8 lg:hidden"
             aria-label="Mobile Navigation Icon"
           >
             <a className="font-pyidaungsu text-[20px]">ပုံရိပ်</a>
-            <button
-              type="button"
-              className="ms-10"
-              onClick={() => setShowMenuPage(false)}
-            >
-              x
+            <button type="button" onClick={() => setShowMenuPage(false)}>
+              <X />
             </button>
           </div>
           <ul
@@ -195,14 +165,15 @@ const Header = () => {
               ),
             )}
           </ul>
-          <button
-            className="primary mt-6 w-full lg:hidden"
+          <Button
+            className="mt-6 w-full lg:hidden"
+            variant="solid"
             onClick={() => setShowAuthModal(true)}
           >
             REGISTER
-          </button>
+          </Button>
           <div
-            className="mx-auto text-center lg:hidden"
+            className="mx-auto mt-[10px] text-center lg:hidden"
             aria-label="Mobile Navigation Copyright"
           >
             <Link href="" className="text-midGrey">
@@ -210,28 +181,14 @@ const Header = () => {
             </Link>
           </div>
         </div>
-        <button className="flex grow rounded-[30px] bg-[#eeeeee] px-4 py-2">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="me-[10px]"
-          >
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11C18 12.8858 17.2543 14.5974 16.0417 15.8561C16.0073 15.8825 15.9743 15.9114 15.9428 15.9429C15.9113 15.9744 15.8824 16.0074 15.856 16.0418C14.5973 17.2543 12.8857 18 11 18C7.13401 18 4 14.866 4 11ZM16.6176 18.0319C15.078 19.2635 13.125 20 11 20C6.02944 20 2 15.9706 2 11C2 6.02944 6.02944 2 11 2C15.9706 2 20 6.02944 20 11C20 13.125 19.2635 15.0781 18.0319 16.6177L21.707 20.2929C22.0975 20.6834 22.0975 21.3166 21.707 21.7071C21.3165 22.0976 20.6833 22.0976 20.2928 21.7071L16.6176 18.0319Z"
-              fill="#1B1B1B"
-            />
-          </svg>
-          Search
+        <button className="flex max-w-[490px] grow justify-end rounded-[30px] lg:justify-start lg:bg-[#eeeeee] lg:px-4 lg:py-2">
+          <Search size={24} />
+          <span className="hidden lg:block">Search</span>
         </button>
         <div className="flex gap-2">
           <Select>
-            <SelectTrigger className="text-[16px] h-full border-gray-500">
-              <div className="flex items-center justify-center gap-1">Eng</div>
+            <SelectTrigger className="h-full border-gray-500 bg-background text-[16px]">
+              <div className="flex items-center justify-center gap-1">ENG</div>
             </SelectTrigger>
             <SelectContent className="bg-background">
               <SelectGroup>
@@ -248,7 +205,7 @@ const Header = () => {
           {currentUser ? (
             <>
               <Button
-                className="hidden lg:block py-0"
+                className="hidden py-0 lg:block"
                 onClick={() => setShowAuthModal(true)}
                 variant="outline"
               >
@@ -260,16 +217,17 @@ const Header = () => {
                 alt="user-avatar"
                 width={38}
                 height={38}
-                onClick={() => logout}
+                onClick={() => logout()}
               />
             </>
           ) : (
-            <button
-              className="c-primary hidden pb-6 lg:block"
+            <Button
+              className="hidden py-0 lg:block"
+              variant="flashy"
               onClick={() => setShowAuthModal(true)}
             >
               REGISTER
-            </button>
+            </Button>
           )}
         </div>
       </nav>

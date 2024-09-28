@@ -5,31 +5,26 @@ import {
 } from "firebase/auth";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
+import { PasswordInput } from "../ui/password-input";
+import { toast } from "@/hooks/use-toast";
 
 const SignupForm = ({ onHide }: { onHide: () => void }) => {
   const [email, setEmail] = useState("");
   const [pswd, setPswd] = useState("");
 
   const handleEmailSignUp = async () => {
-    signInWithEmailAndPassword(auth, email, pswd)
+    createUserWithEmailAndPassword(auth, email, pswd)
       .then(async ({ user: firebaseUser }) => {
         console.log("firebaseUser", firebaseUser);
-
         onHide();
       })
       .catch((error) => {
-        if (error.code === "auth/invalid-credential") {
-          createUserWithEmailAndPassword(auth, email, pswd).then(
-            async ({ user: firebaseUser }) => {
-              console.log("firebaseUser", firebaseUser);
-              if (error) {
-                // delete user from firebase auth
-                await firebaseUser.delete();
-                return;
-              }
-              onHide();
-            },
-          );
+        if (error) {
+          toast({
+            title: "Uh oh!",
+            variant: "destructive",
+            description: error,
+          });
         }
       });
   };
@@ -42,19 +37,19 @@ const SignupForm = ({ onHide }: { onHide: () => void }) => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <input
-        className="m-0 rounded bg-transparent placeholder:text-midGrey"
-        type="password"
+      <PasswordInput
         placeholder="Password"
+        className="h-[50px] border-gray-500 text-base"
         value={pswd}
         onChange={(e) => setPswd(e.target.value)}
       />
-      <input
-        className="rounded bg-transparent placeholder:text-midGrey"
-        type="password"
+      <PasswordInput
         placeholder="Confirm Password"
+        className="h-[50px] border-gray-500 text-base"
       />
-      <Button variant="solid" onClick={handleEmailSignUp}>Register</Button>
+      <Button variant="solid" onClick={handleEmailSignUp}>
+        Register
+      </Button>
     </div>
   );
 };

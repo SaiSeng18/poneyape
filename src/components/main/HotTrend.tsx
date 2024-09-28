@@ -5,7 +5,6 @@ import React, { useRef, useState } from "react";
 import WebsiteCard from "../common/WebsiteCard";
 import Image from "next/image";
 import { buttonLinks, filters } from "@/constants";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
 
@@ -108,12 +107,6 @@ const HotTrendSection = () => {
         </div>
       </div>
       <Button variant="outline">{t("viewAll")}</Button>
-      <Link
-        href={"/search?category=neumorphism"}
-        className="mx-auto flex items-center gap-2 rounded-md border-[1px] border-primary px-6 py-3 text-sm font-semibold text-primary hover:bg-primary hover:text-white"
-      >
-        {t("viewAll")}
-      </Link>
     </section>
   );
 };

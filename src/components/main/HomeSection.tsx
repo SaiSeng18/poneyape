@@ -1,10 +1,14 @@
+"use client";
 import { createStringExtractor } from "@/lib/util";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "../ui/button";
+import AuthModal from "../common/AuthModal";
 
 const HomeSection = () => {
   const lang = "en";
   const t = createStringExtractor(lang);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   return (
     <section className="flex flex-col gap-10 px-6 py-10 md:px-16 md:py-[120px]">
@@ -16,9 +20,11 @@ const HomeSection = () => {
         <p className="py-10 font-semibold text-black md:mx-auto md:max-w-[800px]">
           {t("heroDescription")}
         </p>
-        <button className="c-primary block pb-6 md:hidden">
+
+        <Button className="mb-6 block w-full md:hidden" variant="solid" onClick={() => setShowAuthModal(!showAuthModal)}>
           {t("registerModalTitle")}
-        </button>
+        </Button>
+        <AuthModal show={showAuthModal} setShow={setShowAuthModal} />
       </div>
       <div className="flex flex-col gap-6">
         <h3 className="mb-10 text-center font-semibold text-black">

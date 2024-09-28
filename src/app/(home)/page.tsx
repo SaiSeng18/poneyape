@@ -12,7 +12,7 @@ export default function Home() {
     <div className={`lang-${lang}`}>
       <HomeSection />
       <MonthlyPopularSection />
-      <HotTrend />
+      {/* <HotTrend /> */}
       <Testimonial />
       <Tutorial />
       <LatestNews />

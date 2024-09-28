@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
 import { MouseEventHandler } from "react";
-import Cross from "@/components/Cross";
 
 type TagProps = {
   tag: string;
@@ -18,7 +18,7 @@ const Tag = ({ tag, clickable, variant, onClick }: TagProps) => {
   return (
     <div onClick={onClick} className={cn("flex items-center gap-2", variants[variant || "primary"])}>
       <p className="c-small">{tag}</p>
-      {clickable && <Cross />}
+      {clickable && <X />}
     </div>
   );
 };

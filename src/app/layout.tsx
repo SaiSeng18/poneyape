@@ -21,7 +21,8 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "PoneYape - Elevating Desgin Excellence in Myanmar",
-  description: "Join a vibrant community of designers and unleash your creativity with Poneyape. Whether you're seeking inspiration or aiming to refine your skills, Poneyape is your gateway to mastering Burmese typography and beyond.",
+  description:
+    "Join a vibrant community of designers and unleash your creativity with Poneyape. Whether you're seeking inspiration or aiming to refine your skills, Poneyape is your gateway to mastering Burmese typography and beyond.",
 };
 
 export default function RootLayout({
@@ -30,14 +31,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">      
+    <html lang="en">
       <body
         className={`${inter.className} ${poppins.variable} ${roboto.variable}`}
       >
+        <Toaster />
         <FirebaseProvider>
           <Header />
           <LenisWrapper>{children}</LenisWrapper>
-          <Toaster />
           <Footer />
         </FirebaseProvider>
         <script

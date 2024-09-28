@@ -1,6 +1,7 @@
 import Image from "next/image";
 import TagBar from "./TagBar";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 const WebsiteCard = ({
   id,
@@ -26,9 +27,12 @@ const WebsiteCard = ({
             height={9}
             className="mb-6 max-w-[435px] cursor-pointer transition-all duration-300 md:hover:[filter:brightness(0.6)]"
           />
-          <button className="c-outline c-white pointer-events-none absolute left-[150px] top-[120px] hidden transition-all duration-300 md:group-hover:block">
+          <Button
+            variant="outline"
+            className="pointer-events-none absolute left-[150px] top-[120px] hidden border-white bg-transparent text-white transition-all duration-300 md:group-hover:block"
+          >
             View Detail
-          </button>
+          </Button>
         </Link>
         <div className="flex flex-col gap-2">
           <TagBar tags={tags} />
