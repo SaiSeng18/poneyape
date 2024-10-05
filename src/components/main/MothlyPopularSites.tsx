@@ -1,46 +1,32 @@
-import { createStringExtractor } from "@/lib/util";
+import { createStringExtractor } from "@/lib/utils";
 import React from "react";
-import Image from "next/image";
-import { websiteCard } from "@/constants";
+import { collection, getDocs, limit, query } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import WebsiteCard2 from "../common/WebsiteCard2";
 
-const MonthlyPopularSection = () => {
+const MonthlyPopularSection = async () => {
   const lang = "en";
   const t = createStringExtractor(lang);
 
+  const querySnapshot = await getDocs(
+    query(collection(db, "triage-websites"), limit(5)),
+  );
+
+  const data = querySnapshot.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() } as unknown as WebsiteData;
+  });
+
+  console.log(data);
+
   return (
-    <section className="flex flex-col px-6 pb-10 md:px-16 md:pb-[120px] ">
+    <section className="flex flex-col px-6 pb-10 md:px-16 md:pb-[120px]">
       <div className="mb-20 flex flex-col gap-4">
         <h3 className="text-left font-semibold">{t("popularWebsitesTitle")}</h3>
         <p>{t("popularWebsitesDescription")}</p>
       </div>
       <div className="tab-wrapper flex space-x-10 overflow-x-auto">
-        {websiteCard.map((card) => (
-          <div key={card.id} className="group relative rounded-xl">
-            <Image
-              className="min-h-[430px] min-w-[416px] cursor-pointer rounded-xl object-cover transition duration-1000"
-              src={card.image}
-              alt="Website Image"
-              width={416}
-              height={430}
-            />
-            <div className="absolute bottom-0 left-0 h-1/2 w-full rounded-xl bg-gradient-to-t from-[rgba(0,0,0,0.6)] to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
-            <div className="absolute bottom-0 left-0 mx-4 my-6 w-full opacity-0 transition duration-300 group-hover:opacity-100">
-              <p className="text-2xl font-semibold text-white">{card.title}</p>
-              <div className="flex space-x-2">
-                <p className="text-white">By</p>
-                <Image
-                  className="rounded-full"
-                  src={card.author_image}
-                  alt="Author Image"
-                  width={32}
-                  height={32}
-                />
-                <p className="font-bold text-white underline">
-                  {card.author_name}
-                </p>
-              </div>
-            </div>
-          </div>
+        {data.map((card) => (
+          <WebsiteCard2 key={card.id} data={card} />
         ))}
       </div>
 

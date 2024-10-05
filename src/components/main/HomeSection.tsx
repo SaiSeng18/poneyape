@@ -1,5 +1,5 @@
 "use client";
-import { createStringExtractor } from "@/lib/util";
+import { createStringExtractor } from "@/lib/utils";
 import Image from "next/image";
 import React, { useState } from "react";
 import { Button } from "../ui/button";

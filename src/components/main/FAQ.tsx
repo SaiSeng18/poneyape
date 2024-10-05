@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { createStringExtractor } from "@/lib/util";
+import { createStringExtractor } from "@/lib/utils";
 import FAQDropDown from "../common/FAQDropDown";
 
 const FAQ = () => {

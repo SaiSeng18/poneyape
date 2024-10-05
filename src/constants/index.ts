@@ -189,17 +189,35 @@ export const resources: {
 };
 
 export const placeholderSiteData: WebsiteData = {
+  id: "placeholder",
   title: "Future Tracking",
   description:
     "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident beatae sequi aut harum neque possimus omnis veniam, quas ab labore sit repellendus, nam ipsum dignissimos numquam illum. Quis, veniam optio!",
   vision:
     "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident beatae sequi aut harum neque possimus omnis veniam, quas ab labore sit repellendus, nam ipsum dignissimos numquam illum. Quis, veniam optio!",
   publishDate: 0,
-  tags: ["Blog", "Corporate"],
+  tags: ["T001", "T002"],
   typography: ["Poppins", "Pyidaungsu"],
   colorPalette: ["#E3EBEE", "#DF463C", "#1B3846"],
-  authors: ["Thazin Win", "Julia"],
-  ownerId: ""
+  authorIds: ["Thazin Win", "Julia"],
+  ownerId: "",
+};
+
+export const loadingSiteData: WebsiteData = {
+  id: "loading",
+  title: "LOADING...",
+  coverImageId: "",
+  otherImageIds: [],
+  description:
+    "...",
+  vision:
+    "...",
+  publishDate: 0,
+  tags: [],
+  typography: [],
+  colorPalette: [],
+  authorIds: [],
+  ownerId: "",
 };
 
 export const placeholderUserData: UserData = {
@@ -211,9 +229,16 @@ export const placeholderUserData: UserData = {
   socials: ["https://linkedin.com", "https://x.com", "https://thazin-win.com"],
 };
 
-
-export const tags = ["Blog", "Corporate"];
-
+export const tags = {
+  T001: {
+    nameEn: "Blog",
+    nameMm: "ဘလိုဂ်",
+  },
+  T002: {
+    nameEn: "Minimalism",
+    nameMm: "ရိုးရှင်း",
+  },
+};
 
 export const faq: FAQ[] = [
   {
@@ -262,37 +287,29 @@ export const buttonLinks = [
   "Apps",
 ];
 
-export const websiteCard: websiteCardFormat[] = [
+export const websiteCard: WebsiteData[] = [
   {
-    id: 1,
-    image: "/eg.png",
-    title: "Website Title",
-    author_name: "Author Name",
-    author_image: "/profile.png",
-    link: "https://www.example.com",
+    id: 'lvSpULCvEXqluy5uDe9g',
+    title: 'Past Tracking',
+    description: 'Here is a description of test',
+    tags: [ 'T002' ],
+    authorIds: [ 'Tolony' ],
+    publishDate: 1726304559,
+    typography: [],
+    ownerId: 'nNJopuq363aQh4KjEDAo3gNwhRZ2',
+    vision: 'All of my vision is this.',
+    colorPalette: [ '#FFFFFF' ]
   },
   {
-    id: 2,
-    image: "/eg.png",
-    title: "Website Title",
-    author_name: "Author Name",
-    author_image: "/profile.png",
-    link: "https://www.example.com",
-  },
-  {
-    id: 3,
-    image: "/eg.png",
-    title: "Website Title",
-    author_name: "Author Name",
-    author_image: "/profile.png",
-    link: "https://www.example.com",
-  },
-  {
-    id: 4,
-    image: "/eg.png",
-    title: "Website Title",
-    author_name: "Author Name",
-    author_image: "/profile.png",
-    link: "https://www.example.com",
+    id: 'lvSpULCvEXqluy5uDe9g',
+    title: 'Past Tracking',
+    description: 'Here is a description of test',
+    tags: [ 'T002' ],
+    authorIds: [ 'Tolony' ],
+    publishDate: 1726304559,
+    typography: [],
+    ownerId: 'nNJopuq363aQh4KjEDAo3gNwhRZ2',
+    vision: 'All of my vision is this.',
+    colorPalette: [ '#FFFFFF' ]
   },
 ];

@@ -112,11 +112,10 @@ const Header = () => {
 
       <div className="max-h-[60px] w-full bg-white py-2">
         <h5 className="text-nowrap font-bold">
-          Volunteer Opportunities Available
         </h5>
       </div>
 
-      <nav className="sticky top-0 z-20 flex h-[72px] items-center justify-between gap-10 border-b border-solid border-b-bg1 bg-[#ffffff90] px-6 backdrop-blur-xl lg:justify-normal lg:px-16">
+      <nav className="sticky top-0 z-20 flex h-[72px] items-center justify-between gap-10 border-b border-solid border-b-bg1 bg-[#ffffff90] px-6 backdrop-blur-xl lg:px-16">
         <div className="flex gap-2">
           <button
             type="button"

@@ -26,13 +26,14 @@ export default function CreatePage() {
   const [newColorPalette, setNewColorPalette] = useState("");
   const { currentUser } = useFirebase();
   const [currentData, setCurrentData] = useState<WebsiteData>({
+    id: "",
     title: "",
     description: "",
     vision: "",
     tags: [],
     typography: [],
     colorPalette: [],
-    authors: [],
+    authorIds: [],
     // set when submitted
     publishDate: 0,
     ownerId: "",
@@ -128,7 +129,7 @@ export default function CreatePage() {
                     toast({
                       title: "Uh Oh!",
                       description: "You can't add the same color twice.",
-                      variant: "destructive"
+                      variant: "destructive",
                     });
                   } else {
                     setCurrentData({
@@ -209,11 +210,11 @@ export default function CreatePage() {
               <SelectContent className="bg-background">
                 <SelectGroup>
                   <SelectLabel>
-                    {tags.length === currentData.tags.length
+                    {Object.keys(tags).length === currentData.tags.length
                       ? "All tags added!"
                       : "Tag"}
                   </SelectLabel>
-                  {tags
+                  {Object.keys(tags)
                     .filter((tag) => !currentData.tags.includes(tag))
                     .map((tag) => (
                       <SelectItem key={tag} value={tag}>

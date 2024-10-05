@@ -40,25 +40,19 @@ declare type TestimonialProps = {
   position: string;
 };
 
-declare type websiteCardFormat = {
-  id: number;
-  image: string;
-  title: string;
-  author_name: string;
-  author_image: string;
-  link: string;
-};
-
 declare type WebsiteData = {
+  id: string;
   ownerId: string;
   title: string;
+  coverImageId: string;
   description: string;
   vision: string;
   publishDate: number;
   tags: string[];
   typography: string[];
   colorPalette: string[];
-  authors: string[];
+  authorIds: string[];
+  otherImageIds: string[];
 };
 
 declare type UserData = {
