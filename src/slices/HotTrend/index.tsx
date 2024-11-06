@@ -3,16 +3,14 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Content } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
-import { SliceComponentProps } from "@prismicio/react";
-import { t } from "i18next";
-import { Link } from "lucide-react";
+import type { Content } from "@prismicio/client";
+import { PrismicNextLink } from "@/lib/prismicio-next";
+import type { SliceComponentProps } from "@prismicio/react";
 
 import WebsiteCard from "@/components/common/WebsiteCard";
 import { Button } from "@/components/ui/button";
 import { buttonLinks, filters } from "@/constants";
-import { cn, createStringExtractor } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { WebsiteDataFetch } from "@/types";
 
 /**

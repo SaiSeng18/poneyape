@@ -3,7 +3,7 @@ import { Inter, Poppins, Roboto } from "next/font/google";
 
 import "./globals.css";
 
-import { PrismicPreview } from "@prismicio/next";
+import { PrismicPreview } from "@/lib/prismicio-next";
 
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
@@ -11,8 +11,6 @@ import { Toaster } from "@/components/ui/toaster";
 import LenisWrapper from "@/lib/lenis-wrapper";
 import { getUserLocale } from "@/locale";
 import { createClient, repositoryName } from "@/prismicio";
-
-export const runtime = "edge";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -57,3 +55,6 @@ export default async function RootLayout({
     </html>
   );
 }
+
+// cloudflare requirement
+export const runtime = "experimental-edge";

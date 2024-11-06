@@ -4,8 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { PrismicNextLink } from "@prismicio/next";
-import { SliceZone } from "@prismicio/react";
+import { PrismicNextLink, SliceZone } from "@/lib/prismicio-next";
 import {
   AwardIcon,
   BookOpen,
@@ -30,9 +29,7 @@ import { components } from "@/slices";
 
 import {
   HeaderLinksDocument,
-  HeaderLinksDocumentDataLinksItem,
-  Simplify,
-} from "../../../prismicio-types";
+} from "@/../prismicio-types";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Skeleton } from "../ui/skeleton";
 import { NavLinks } from "./NavLinks";

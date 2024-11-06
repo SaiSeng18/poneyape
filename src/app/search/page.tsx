@@ -1,5 +1,5 @@
-"use client";
 import Image from "next/image";
+
 import Tag from "@/components/common/Tag";
 
 export default function SearchPage() {

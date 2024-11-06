@@ -1,6 +1,7 @@
-import { Content } from "@prismicio/client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
-import { SliceComponentProps } from "@prismicio/react";
+import type { Content } from "@prismicio/client";
+import type { SliceComponentProps } from "@prismicio/react";
+
+import { PrismicNextImage, PrismicNextLink } from "@/lib/prismicio-next";
 
 /**
  * Props for `Tutorial`.

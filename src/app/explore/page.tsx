@@ -1,5 +1,7 @@
 export default function Explore() {
-  return <div className="flex h-screen w-full items-center justify-center">
+  return (
+    <div className="flex h-screen w-full items-center justify-center">
       <h1>Coming Soon</h1>
-    </div>;
+    </div>
+  );
 }

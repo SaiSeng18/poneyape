@@ -1,4 +1,4 @@
-import { Client, Content } from "@prismicio/client";
+import type { Client, Content } from "@prismicio/client";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { SliceZone } from "@prismicio/react";
+import { SliceZone } from "@/lib/prismicio-next";
 import {
   getSlices,
   SliceSimulator,

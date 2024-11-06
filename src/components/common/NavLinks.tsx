@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { GroupField } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
+import { PrismicNextImage } from "@/lib/prismicio-next";
 import { AlignJustify, Award, BookOpen, Home, Search, X } from "lucide-react";
 
 import { useCurrentUser } from "@/hooks/useCurrentUser";

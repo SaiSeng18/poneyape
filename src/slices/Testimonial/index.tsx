@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Content } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
-import { SliceComponentProps } from "@prismicio/react";
+import type { Content } from "@prismicio/client";
+import { PrismicNextImage } from "@/lib/prismicio-next";
+import type { SliceComponentProps } from "@prismicio/react";
 import { Star } from "lucide-react";
 
 import {

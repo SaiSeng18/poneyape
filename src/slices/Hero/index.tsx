@@ -1,13 +1,10 @@
 "use client";
 
-import { Suspense } from "react";
-import { Content } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
-import { SliceComponentProps } from "@prismicio/react";
+import type { Content } from "@prismicio/client";
+import { PrismicNextImage } from "@/lib/prismicio-next";
+import type { SliceComponentProps } from "@prismicio/react";
 
-import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import useLocale from "@/locale/client";
 import { Locale } from "@/locale/config";
 
 /**

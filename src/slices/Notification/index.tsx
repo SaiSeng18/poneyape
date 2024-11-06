@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Content } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
-import { SliceComponentProps } from "@prismicio/react";
+import { PrismicNextImage } from "@/lib/prismicio-next";
+import type { SliceComponentProps } from "@prismicio/react";
 
 /**
  * Props for `Notification`.

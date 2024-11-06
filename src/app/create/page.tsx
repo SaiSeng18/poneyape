@@ -1,7 +1,4 @@
-import { redirect } from "next/navigation";
-
 import CreateForm from "@/components/main/CreateForm";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { getUserLocale } from "@/locale";
 import { createClient } from "@/prismicio";
 
