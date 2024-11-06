@@ -1,21 +1,31 @@
+import { useState } from "react";
+
 import LoginForm from "@/components/main/LoginForm";
 import SignupForm from "@/components/main/SignupForm";
-import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { firebaseClient } from "@/lib/firebase";
 import { AuthModalProps } from "@/types";
-import { signInWithFacebook, signInWithGoogle } from "@/lib/firebase/auth";
+
+import FacebookIcon from "../icons/FacebookIcon";
+import GoogleIcon from "../icons/GoogleIcon";
 
 const AuthModal = ({ show, setShow }: AuthModalProps) => {
   const [view, setView] = useState<"signup" | "login">("signup");
 
   const handleGoogleSignIn = async () => {
-    const res = await signInWithGoogle();
+    const res = await firebaseClient.signInWithGoogle();
     if (res) {
       setShow(false);
     }
   };
 
   const handleFacebookSignIn = async () => {
-    const res = await signInWithFacebook();
+    const res = await firebaseClient.signInWithFacebook();
     if (res) {
       setShow(false);
     }
@@ -24,73 +34,49 @@ const AuthModal = ({ show, setShow }: AuthModalProps) => {
   const closeModal = () => setShow(false);
 
   return (
-    <div
-      className={`fixed left-0 right-0 top-0 z-50 text-black ${show ? "flex" : "hidden"} h-full max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-[#000000aa] md:inset-0`}
-      aria-label="Backdrop"
-    >
-      <div
-        className="relative h-[700px] max-h-full w-full max-w-[600px] rounded-lg shadow dark:bg-gray-700"
-        aria-label="Modal"
+    <Dialog open={show} onOpenChange={setShow}>
+      <DialogContent
+        aria-describedby="Authentication Modal"
+        className="rounded-lg shadow dark:bg-gray-700"
         style={{
           background:
             "linear-gradient(156deg, #F8F0FF 3.55%, #FFF 49.39%, #E2F0FF 98.07%)",
         }}
+        onInteractOutside={(e) => e.preventDefault()}
       >
-        <div className="flex flex-col items-center justify-between rounded-lg px-6 pt-4 md:px-12 md:pt-4">
-          <button
-            type="button"
-            onClick={closeModal}
-            className="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
-            data-modal-hide="default-modal"
-          >
-            <svg
-              className="h-3 w-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-              />
-            </svg>
-            <span className="sr-only">Close modal</span>
-          </button>
-          <h1 className="mb-4 font-bold">
+        <DialogHeader className="flex flex-col items-center justify-center">
+          <DialogTitle className="mb-4 font-bold text-5xl font-roboto">
             {view === "signup" ? "Register" : "Login"}
-          </h1>
+          </DialogTitle>
           <h5>Join our community!</h5>
-        </div>
+        </DialogHeader>
         <div className="flex flex-col space-y-4 px-6 pb-10 pt-6 md:px-12 md:pb-12 md:pt-8">
           {view === "login" ? (
             <LoginForm onHide={closeModal} />
           ) : (
             <SignupForm onHide={closeModal} />
           )}
-          <div className="relative py-4">
-            <span className="absolute left-[220px] top-1 bg-black px-1 text-white">
-              OR
-            </span>
-            <hr className="border border-dashed border-[#1B1B1B]" />
+          <div className="relative flex w-full items-center py-4">
+            <div className="w-full border border-dashed border-[#1B1B1B]" />
+            <span className="px-1">OR</span>
+            <div className="w-full border border-dashed border-[#1B1B1B]" />
           </div>
           <button
             data-modal-hide="default-modal"
             type="button"
-            className="c-outline c-black"
+            className="c-outline c-black flex items-center justify-center gap-2"
             onClick={handleGoogleSignIn}
           >
+            <GoogleIcon />
             Continue with Google
           </button>
           <button
             data-modal-hide="default-modal"
             type="button"
-            className="c-outline c-black"
+            className="c-outline c-black flex items-center justify-center gap-2"
             onClick={handleFacebookSignIn}
           >
+            <FacebookIcon />
             Continue with Facebook
           </button>
           {view === "signup" ? (
@@ -109,8 +95,8 @@ const AuthModal = ({ show, setShow }: AuthModalProps) => {
             </p>
           )}
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 

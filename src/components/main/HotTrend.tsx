@@ -3,7 +3,7 @@
 import React from "react";
 
 import { WOTMCarousel } from "@/components/common/CarouselSlider";
-import { createStringExtractor } from "@/lib/util";
+import { createStringExtractor } from "@/lib/utils";
 import { WebsiteDataFetch } from "@/types";
 
 const HotTrendSection = ({ data }: { data: WebsiteDataFetch[] }) => {

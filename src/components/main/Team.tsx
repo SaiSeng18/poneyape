@@ -1,6 +1,7 @@
 import React from "react";
+
 import OurTeamSlider from "@/components/common/OurTeamSlider";
-import { createStringExtractor } from "@/lib/util";
+import { createStringExtractor } from "@/lib/utils";
 
 const Team = () => {
   const lang = "en";

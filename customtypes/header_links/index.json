@@ -1,0 +1,70 @@
+{
+  "format": "custom",
+  "id": "header_links",
+  "label": "Header Links",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "links": {
+        "type": "Group",
+        "config": {
+          "label": "Links",
+          "repeat": true,
+          "fields": {
+            "icon": {
+              "type": "Image",
+              "config": {
+                "label": "Icon",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
+            "href": {
+              "type": "Link",
+              "config": {
+                "label": "Href",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "select": null,
+                "allowText": true
+              }
+            }
+          }
+        }
+      },
+      "search": {
+        "type": "Text",
+        "config": {
+          "label": "Search",
+          "placeholder": ""
+        }
+      },
+      "submit_work": {
+        "type": "Text",
+        "config": {
+          "label": "Submit Work",
+          "placeholder": ""
+        }
+      },
+      "register": {
+        "type": "Text",
+        "config": {
+          "label": "Register",
+          "placeholder": ""
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "notification": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    }
+  }
+}

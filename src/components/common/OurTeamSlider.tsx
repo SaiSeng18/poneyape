@@ -2,16 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
-import { cards } from "@/constants";
 import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
+import { cards } from "@/constants";
+import { cn } from "@/lib/utils";
+
 import {
   Carousel,
   CarouselApi,
   CarouselContent,
   CarouselItem,
 } from "../ui/carousel";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const OurTeamSlider = () => {
   const [api, setApi] = useState<CarouselApi>();

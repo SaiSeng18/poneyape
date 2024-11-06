@@ -1,0 +1,102 @@
+{
+  "format": "custom",
+  "id": "website_detail",
+  "label": "Website Detail",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "nominated": {
+        "type": "Text",
+        "config": {
+          "label": "Nominated",
+          "placeholder": ""
+        }
+      },
+      "vote": {
+        "type": "Text",
+        "config": {
+          "label": "Vote",
+          "placeholder": ""
+        }
+      },
+      "share": {
+        "type": "Text",
+        "config": {
+          "label": "Share",
+          "placeholder": ""
+        }
+      },
+      "copy_link": {
+        "type": "Text",
+        "config": {
+          "label": "Copy Link",
+          "placeholder": ""
+        }
+      },
+      "views": {
+        "type": "Text",
+        "config": {
+          "label": "Views",
+          "placeholder": ""
+        }
+      },
+      "description": {
+        "type": "Text",
+        "config": {
+          "label": "Description",
+          "placeholder": ""
+        }
+      },
+      "vision": {
+        "type": "Text",
+        "config": {
+          "label": "Vision",
+          "placeholder": ""
+        }
+      },
+      "typography": {
+        "type": "Text",
+        "config": {
+          "label": "Typography",
+          "placeholder": ""
+        }
+      },
+      "color_palette": {
+        "type": "Text",
+        "config": {
+          "label": "Color Palette",
+          "placeholder": ""
+        }
+      },
+      "tags": {
+        "type": "Text",
+        "config": {
+          "label": "Tags",
+          "placeholder": ""
+        }
+      },
+      "other_screens_of_the_website": {
+        "type": "Text",
+        "config": {
+          "label": "Other Screens of the Website",
+          "placeholder": ""
+        }
+      },
+      "designer_information": {
+        "type": "Text",
+        "config": {
+          "label": "Designer Information",
+          "placeholder": ""
+        }
+      },
+      "similar_collections": {
+        "type": "Text",
+        "config": {
+          "label": "Similar Collections",
+          "placeholder": ""
+        }
+      }
+    }
+  }
+}

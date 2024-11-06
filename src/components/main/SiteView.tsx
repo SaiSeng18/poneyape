@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import { ChevronLeft } from "lucide-react";
 import useSWR from "swr";
 
 import FontDisplay from "@/components/common/FontDisplay";
@@ -14,34 +15,41 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useFirestoreUser } from "@/hooks/useFirestoreUser";
 import { SocialIcon } from "@/icons/SocialIcon";
-import { getDomain } from "@/lib/util";
-import { UserData, WebsiteData } from "@/types";
+import { getDomain } from "@/lib/utils";
+import { UserData, WebsiteData, WebsiteDataFetch } from "@/types";
 
-const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
+import { WebsiteDetailDocument } from "../../../prismicio-types";
+
+const SiteView = ({
+  data,
+  user,
+  details,
+}: {
+  data: WebsiteDataFetch;
+  user: UserData;
+  details: WebsiteDetailDocument<string>;
+}) => {
   const date = new Date(data.publishDate * 1000).toLocaleString();
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data: owner, isLoading } = useSWR(
-    `/api/users/${data.ownerId}`,
-    fetcher,
-  );
+  // const { userInfo: owner, isLoading, error } = useFirestoreUser(data.ownerId);
 
   return (
     <>
       <section className="flex flex-col gap-6 px-6 py-10 md:px-16 md:py-10">
         <div className="flex items-start justify-between lg:items-center">
           <div className="flex flex-col gap-2 md:gap-6 lg:flex-row">
-            <Link className="hidden text-primary lg:block" href="\">
-              &lt; Home
+            <Link className="hidden text-primary lg:flex lg:gap-2" href="\">
+              <ChevronLeft /> Home
             </Link>
             <p className="c-body font-semibold text-[#1B1B1B]">{data.title}</p>
             <TagBar tags={data.tags} />
           </div>
           <div className="flex gap-4">
-            <div className="flex md:items-center">
+            <div className="flex opacity-0 md:items-center">
               <div className="me-1 mt-[6px] h-[14px] w-[14px] rounded-full border-4 border-[#D7E2FF] bg-[#3D52D5] md:mt-0" />
               <p className="c-body font-semibold uppercase text-primary">
-                nominated
+                {details.data.nominated}
               </p>
             </div>
             <button className="hidden rounded-[8px] border border-black px-4 py-3 md:block">
@@ -59,7 +67,7 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
               </svg>
             </button>
             <button className="c-black hidden flex-grow rounded-[8px] bg-black px-6 py-3 text-white md:block">
-              Vote
+              {details.data.vote}
             </button>
           </div>
         </div>
@@ -94,7 +102,9 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
                   fill="#1B1B1B"
                 />
               </svg>
-              <span className="hidden text-black md:block">Share</span>
+              <span className="hidden text-black md:block">
+                {details.data.share}
+              </span>
             </button>
             <button className="flex flex-1 flex-grow justify-center gap-3 bg-white py-3">
               <svg
@@ -113,10 +123,12 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
                   fill="#1B1B1B"
                 />
               </svg>
-              <span className="hidden text-black md:block">Copy Link</span>
+              <span className="hidden text-black md:block">
+                {details.data.copy_link}
+              </span>
             </button>
             <button className="c-black flex-1 flex-grow rounded-r-full bg-black py-3 text-white">
-              Vote
+              {details.data.vote}
             </button>
           </div>
         </div>
@@ -129,21 +141,24 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
             aria-label="Website Card"
             className="flex flex-col gap-3 md:flex-row md:items-center"
           >
-            <div className="flex items-center gap-4" aria-label="Authors">
+            <div
+              className="flex flex-wrap items-center gap-4"
+              aria-label="Authors"
+            >
               <div className="flex items-center gap-2">
                 <Image
-                  src={owner?.photoURL || "/profile.png"}
+                  src={data?.owner.profileImage || "/profile.png"}
                   className="size-8 shrink-0 rounded-full"
                   alt="Profile Picture"
                   width={32}
                   height={32}
                 />
                 <p className="c-small md:c-body font-semibold text-black underline">
-                  {owner?.name}
+                  {data?.owner.username}
                 </p>
               </div>
-              {data.authors.map((author) => (
-                <div className="flex items-center gap-2" key={author}>
+              {data.authors?.map((author) => (
+                <div className="flex items-center gap-2" key={author.userId}>
                   <Image
                     src="/profile.png"
                     className="rounded-full"
@@ -152,7 +167,7 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
                     height={32}
                   />
                   <p className="c-small md:c-body font-semibold text-black underline">
-                    {author}
+                    {author.username}
                   </p>
                 </div>
               ))}
@@ -168,7 +183,7 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
               </span>
               <span className="text-3xl font-bold text-black">·</span>
               <span className="text-sm font-semibold text-black md:text-lg">
-                61 views
+                61 {details.data.views}
               </span>{" "}
               <span className="text-3xl font-bold text-black">·</span>
               <PieChart percentage={50} />
@@ -195,7 +210,9 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
                   fill="#1B1B1B"
                 />
               </svg>
-              <span className="hidden text-black md:block">Share</span>
+              <span className="hidden text-black md:block">
+                {details.data.share}
+              </span>
             </button>
             <button className="flex flex-1 flex-grow justify-center gap-3 bg-white py-3">
               <svg
@@ -214,10 +231,12 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
                   fill="#1B1B1B"
                 />
               </svg>
-              <span className="hidden text-black md:block">Copy Link</span>
+              <span className="hidden text-black md:block">
+                {details.data.copy_link}
+              </span>
             </button>
             <button className="c-black flex-1 flex-grow rounded-r-full bg-black py-3 text-white">
-              Vote
+              {details.data.vote}
             </button>
           </div>
         </div>
@@ -228,19 +247,23 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
         aria-label="Website Details"
       >
         <div className="border-b border-dashed border-black pb-10 md:flex md:justify-between md:pb-16">
-          <h5 className="mb-4 flex-1 font-bold">Description</h5>
+          <h5 className="mb-4 flex-1 font-bold">{details.data.description}</h5>
           <p className="flex-1">{data.description}</p>
         </div>
         <div className="border-b border-dashed border-black pb-10 md:flex md:justify-between md:pb-16">
-          <h5 className="mb-4 flex-1 font-bold">Vision</h5>
+          <h5 className="mb-4 flex-1 font-bold">{details.data.vision}</h5>
           <p className="flex-1">{data.vision}</p>
         </div>
         <div className="border-b border-dashed border-black pb-10 md:flex md:justify-between md:pb-16">
-          <h5 className="mb-4 flex-1 font-bold">Typography</h5>
+          <h5 className="mb-4 flex-1 text-nowrap font-bold">
+            {details.data.typography}
+          </h5>
           <FontDisplay typography={data.typography} />
         </div>
         <div className="border-b border-dashed border-black pb-10 md:flex md:justify-between md:pb-16">
-          <h5 className="mb-4 flex-1 font-bold">Color Palette</h5>
+          <h5 className="mb-4 flex-1 font-bold">
+            {details.data.color_palette}
+          </h5>
           <div className="flex flex-1 flex-wrap items-center justify-start gap-4">
             {data.colorPalette.map((color) => (
               <div
@@ -259,7 +282,7 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
           </div>
         </div>
         <div className="border-b border-dashed border-black pb-10 md:flex md:justify-between md:pb-16">
-          <h5 className="mb-4 flex-1 font-bold">Tags</h5>
+          <h5 className="mb-4 flex-1 font-bold">{details.data.tags}</h5>
           <div className="flex flex-1 flex-wrap gap-2">
             {data.tags.map((tag) => (
               <div
@@ -273,7 +296,7 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
         </div>
 
         <h1 className="mt-10 text-4xl font-bold md:text-5xl">
-          Other Screens of the Website
+          {details.data.other_screens_of_the_website}
         </h1>
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3">
           {data?.screens?.map((screen, i) => (
@@ -318,11 +341,11 @@ const SiteView = ({ data, user }: { data: WebsiteData; user: UserData }) => {
           }}
         />
         <h3 className="mb-10 text-[32px] font-semibold md:text-4xl">
-          Designer Information
+          {details.data.designer_information}
         </h3>
         <div className="flex flex-col gap-20 md:flex-row">
           {data.authors.map((author) => (
-            <div key={author} className="flex flex-col gap-4">
+            <div key={author.userId} className="flex flex-col gap-4">
               <div className="flex items-center gap-6">
                 <Image
                   src={user.profilePicture}

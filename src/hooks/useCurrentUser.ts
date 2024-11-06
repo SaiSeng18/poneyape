@@ -1,7 +1,10 @@
-import { Auth, User } from "firebase/auth";
-import { useState, useEffect } from "react";
+"use client";
 
-export const useCurrentUser = (auth: Auth) => {
+import { User } from "firebase/auth";
+import { useState, useEffect } from "react";
+import { auth } from "@/lib/firebase";
+
+export const useCurrentUser = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -10,7 +13,7 @@ export const useCurrentUser = (auth: Auth) => {
     });
 
     return unsubscribe;
-  }, [auth]);
+  }, []);
 
   return currentUser;
 };

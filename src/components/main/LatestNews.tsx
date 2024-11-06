@@ -1,6 +1,7 @@
-import { createStringExtractor } from "@/lib/util";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+
+import { createStringExtractor } from "@/lib/utils";
 
 const LatestNews = () => {
   const lang = "en";

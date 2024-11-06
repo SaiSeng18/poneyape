@@ -1,0 +1,55 @@
+{
+  "id": "notification",
+  "type": "SharedSlice",
+  "name": "Notification",
+  "description": "Notification",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "icon": {
+          "type": "Image",
+          "config": {
+            "label": "Icon",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "description": {
+          "type": "Text",
+          "config": {
+            "label": "Description",
+            "placeholder": ""
+          }
+        },
+        "gradient_1": {
+          "type": "Color",
+          "config": {
+            "label": "Gradient 1",
+            "placeholder": ""
+          }
+        },
+        "gradient_2": {
+          "type": "Color",
+          "config": {
+            "label": "Gradient 2",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

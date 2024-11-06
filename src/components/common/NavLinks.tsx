@@ -1,23 +1,30 @@
 "use client";
 
-import { useCurrentUser } from "@/hooks/useCurrentUser";
-import { useFirebase } from "@/hooks/useFirebase";
-import { signOut } from "@/lib/firebase/auth";
-import { auth } from "@/lib/firebase/firebase";
-import { AlignJustify, Award, BookOpen, Home, Search, X } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { GroupField } from "@prismicio/client";
+import { PrismicNextImage } from "@prismicio/next";
+import { AlignJustify, Award, BookOpen, Home, Search, X } from "lucide-react";
+
+import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { firebaseClient } from "@/lib/firebase";
+
+import {
+  HeaderLinksDocumentDataLinksItem,
+  Simplify,
+} from "../../../prismicio-types";
 
 export const NavLinks = ({
+  links,
   setShowAuthModel,
 }: {
+  links: GroupField<Simplify<HeaderLinksDocumentDataLinksItem>>;
   setShowAuthModel: Dispatch<SetStateAction<boolean>>;
 }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const user = useCurrentUser(auth);
+  const user = useCurrentUser();
 
   const handleClick = (route: string) => {
     router.push(route);
@@ -47,15 +54,15 @@ export const NavLinks = ({
                 <Image
                   src={user.photoURL || ""}
                   alt="user-avatar"
-                  width={49}
+                  width={48}
                   height={48}
-                  className="size-[48px] shrink-0 cursor-pointer rounded-full object-cover"
-                  onClick={() => signOut()}
+                  className="size-auto shrink-0 cursor-pointer rounded-full object-cover"
+                  onClick={() => firebaseClient.signOut()}
                 />
               ) : (
                 <div
                   className="flex size-[48px] shrink-0 cursor-pointer items-center justify-center rounded-full bg-gray-300 text-lg font-medium"
-                  onClick={() => signOut()}
+                  onClick={() => firebaseClient.signOut()}
                 >
                   {user?.email ? user.email[0].toUpperCase() : "N/A"}
                 </div>
@@ -81,7 +88,22 @@ export const NavLinks = ({
 
           <nav>
             <ul className="flex flex-col gap-9">
-              <li>
+              {links?.map((link, index) => {
+                const url = (link.href as any).url;
+                return (
+                  <li key={index}>
+                    <button
+                      onClick={() => handleClick(url)}
+                      className="flex items-center gap-4 text-lg"
+                    >
+                      {/* <Image src={url} width={24} height={24} al /> */}
+                      <PrismicNextImage field={link.icon} />
+                      {link.href.text}
+                    </button>
+                  </li>
+                );
+              })}
+              {/* <li>
                 <button
                   onClick={() => handleClick("/")}
                   className="flex items-center gap-4 text-lg"
@@ -116,13 +138,13 @@ export const NavLinks = ({
                   <Search />
                   Explore
                 </button>
-              </li>
+              </li> */}
             </ul>
           </nav>
 
           {user ? (
             <button
-              onClick={() => signOut()}
+              onClick={() => firebaseClient.signOut()}
               className="mt-[40px] w-full rounded-[5px] border border-[#999999] bg-white py-3 text-black"
             >
               Log Out

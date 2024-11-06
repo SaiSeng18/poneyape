@@ -1,0 +1,6 @@
+{
+  "repositoryName": "poneyape",
+  "adapter": "@slicemachine/adapter-next",
+  "libraries": ["./src/slices", "./src/slices/website-detail"],
+  "localSliceSimulatorURL": "http://localhost:3000/slice-simulator"
+}

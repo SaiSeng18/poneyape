@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { buttonLinks, filters } from "@/constants";
-import { cn, createStringExtractor } from "@/lib/util";
+import { cn, createStringExtractor } from "@/lib/utils";
 import { WebsiteDataFetch } from "@/types";
 
 import WebsiteCard from "../common/WebsiteCard";
@@ -126,9 +126,9 @@ const HomeSection = ({ data }: { data: WebsiteDataFetch[] }) => {
           {data.map((item, i) => (
             <WebsiteCard
               key={item.id}
-              id={item.id}
+              id={item.id!}
               coverImage={item.cover}
-              primaryAuthor={item.ownerId}
+              primaryAuthor={item.owner}
               tags={item.tags}
               title={item.title}
             />

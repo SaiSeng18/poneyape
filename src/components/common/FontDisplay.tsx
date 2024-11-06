@@ -14,7 +14,7 @@ const FontDisplay = ({ typography }: { typography: string[] }) => {
               selectedFont === i
                 ? "border-y border-black text-black"
                 : "border-none text-[#999999]",
-              "flex w-full justify-center py-1 hover:border-y hover:border-black",
+              "flex w-full justify-center text-nowrap py-1 hover:border-y hover:border-black",
             )}
             key={font}
             onClick={() => setSelectedFont(i)}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useToast } from "@/hooks/use-toast";
-import resetPassword, { signInWithEmail } from "@/lib/firebase/auth";
+import { firebaseClient } from "@/lib/firebase";
 
 const LoginForm = ({ onHide }: { onHide: () => void }) => {
   const [email, setEmail] = useState("");
@@ -10,7 +10,7 @@ const LoginForm = ({ onHide }: { onHide: () => void }) => {
 
   const handleEmailSignUp = async () => {
     try {
-      const res = await signInWithEmail(email, pswd);
+      const res = await firebaseClient.signInWithEmail(email, pswd);
 
       if (res) {
         onHide();
@@ -40,7 +40,7 @@ const LoginForm = ({ onHide }: { onHide: () => void }) => {
     }
 
     try {
-      const res = await resetPassword(email);
+      const res = await firebaseClient.resetPassword(email);
 
       if (res) {
         toast({

@@ -13,7 +13,7 @@ declare type WebsiteCardProps = {
   id: string;
   title: string;
   tags: string[];
-  primaryAuthor: string;
+  primaryAuthor: UserCollection;
   coverImage: string;
   // profile: string;
 };
@@ -49,9 +49,16 @@ declare type websiteCardFormat = {
   link: string;
 };
 
+declare type UserCollection = {
+  userId: string;
+  username: string;
+  email: string;
+  profileImage: string;
+};
+
 declare type WebsiteDataFetch = {
-  id: string;
-  ownerId: string;
+  id?: string;
+  owner: UserCollection;
   cover: string;
   title: string;
   description: string;
@@ -60,12 +67,12 @@ declare type WebsiteDataFetch = {
   tags: string[];
   typography: string[];
   colorPalette: string[];
-  authors: string[];
+  authors: UserCollection[];
   screens: string[];
 };
 
 declare type WebsiteData = {
-  ownerId: string;
+  owner: string;
   cover: string;
   title: string;
   description: string;

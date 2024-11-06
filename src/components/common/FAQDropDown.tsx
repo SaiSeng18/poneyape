@@ -1,12 +1,23 @@
-import { faq } from "@/constants";
-import React, { useState } from "react";
+// import { faq } from "@/constants";
+"use client";
 
-const FAQDropDown = () => {
-  const [isOpen, setIsOpen] = useState(faq.map((item, index) => index === 0));
+import React, { useState } from "react";
+import { Content, GroupField } from "@prismicio/client";
+
+import { FAQ } from "@/types";
+
+import { Simplify } from "../../../prismicio-types";
+
+const FAQDropDown = ({
+  faq,
+}: {
+  faq?: GroupField<Simplify<Content.FaqSliceDefaultPrimaryQuestionsItem>>;
+}) => {
+  const [isOpen, setIsOpen] = useState(faq?.map((item, index) => index === 0));
 
   const handleToggle = (key: number) => {
     setIsOpen((prevIsOpen) =>
-      prevIsOpen.map((open, i) => (i === key ? !open : open)),
+      prevIsOpen?.map((open, i) => (i === key ? !open : open)),
     );
   };
 
@@ -44,17 +55,17 @@ const FAQDropDown = () => {
   return (
     <div>
       <hr className="border-black" />
-      {faq.map((value, key) => (
-        <div key={value.id} className="border-b border-black">
+      {faq?.map((value, i) => (
+        <div key={i} className="border-b border-black">
           <h4
-            onClick={() => handleToggle(key)}
+            onClick={() => handleToggle(i)}
             className="flex items-center justify-between py-5"
           >
             <span className="font-roboto text-xl">{value.question}</span>{" "}
-            {isOpen[key] ? <OpenArrow /> : <CloseArrow />}
+            {isOpen && isOpen[i] ? <OpenArrow /> : <CloseArrow />}
           </h4>
           <span className="pb-6">
-            {isOpen[key] && <p className="pb-6">{value.answer}</p>}
+            {isOpen && isOpen[i] && <p className="pb-6">{value.answer}</p>}
           </span>
         </div>
       ))}

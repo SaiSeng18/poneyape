@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { createStringExtractor } from "@/lib/util";
+
+import { createStringExtractor } from "@/lib/utils";
 
 const Tutorial = () => {
   const lang = "en";

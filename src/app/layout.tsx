@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import { Inter, Poppins, Roboto } from "next/font/google";
+
 import "./globals.css";
-import Header from "@/components/common/Header";
-import LenisWrapper from "@/lib/lenis-wrapper";
+
+import { PrismicPreview } from "@prismicio/next";
+
 import Footer from "@/components/common/Footer";
-import Head from "next/head";
-import { FirebaseProvider } from "@/context/firebaseContext";
+import Header from "@/components/common/Header";
 import { Toaster } from "@/components/ui/toaster";
+import LenisWrapper from "@/lib/lenis-wrapper";
+import { getUserLocale } from "@/locale";
+import { createClient, repositoryName } from "@/prismicio";
+
+export const runtime = "edge";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -25,24 +31,28 @@ export const metadata: Metadata = {
   description: "Poneyape",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getUserLocale();
+  const client = createClient();
+
+  const data = await client.getSingle("header_links", { lang: locale });
+
   return (
     <html lang="en">
       <body
         className={`${inter.className} ${poppins.variable} ${roboto.variable}`}
       >
-        <FirebaseProvider>
-          <Header />
-          {/* <LenisWrapper> */}
-          {children}
-          {/* </LenisWrapper> */}
-          <Footer />
-          <Toaster />
-        </FirebaseProvider>
+        <Header locale={locale} data={data} />
+        {/* <LenisWrapper> */}
+        {children}
+        {/* </LenisWrapper> */}
+        <Footer />
+        <Toaster />
+        <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
   );
